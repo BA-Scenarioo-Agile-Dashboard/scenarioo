@@ -8,7 +8,30 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Link {
 
-	public String name;
-	public String url;
+	private String name;
+	private String url;
 
+	public Link() {
+	}
+
+	public Link(String name, String url) {
+		this.setName(name);
+		this.setUrl(url);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

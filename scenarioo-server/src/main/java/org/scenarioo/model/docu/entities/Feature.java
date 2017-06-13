@@ -49,13 +49,11 @@ public class Feature implements Serializable, Labelable, Detailable {
 	private String milestone; // string to filter by
 	private String type; // Display Type
 	private int orderIndex;
-	private List<String> featureNames = new ArrayList<String>();
-
-
+	private List<String> subFeatureNames = new ArrayList<String>();
 
 	private List<Feature> features = new ArrayList<>();
-	private DokuFile markdown;
-	private DokuFile specification;
+	private DocFile documentation;
+	private DocFile specification;
 	private Details details = new Details();
 	private Labels labels = new Labels();
 
@@ -67,7 +65,6 @@ public class Feature implements Serializable, Labelable, Detailable {
 		this();
 		this.setName(name);
 		this.setDescription(description);
-		this.setStatus("");
 	}
 	public Feature(Feature other) {
 		this.labels = other.labels;
@@ -78,8 +75,8 @@ public class Feature implements Serializable, Labelable, Detailable {
 		this.setMilestone(other.getMilestone());
 		this.setType(other.getType());
 		this.setStatus(other.getStatus());
-		this.setFeatureNames(other.getFeatureNames());
-		this.setMarkdown(other.getMarkdown());
+		this.setSubFeatureNames(other.getSubFeatureNames());
+		this.setDocumentation(other.getDocumentation());
 		this.setSpecification(other.getSpecification());
 		this.setOrderIndex(other.getOrderIndex());
 	}
@@ -87,7 +84,7 @@ public class Feature implements Serializable, Labelable, Detailable {
 	@Override
 	public String toString() {
 		final String[] txt = {getName()};
-		for (String featureName: getFeatureNames()){
+		for (String featureName: getSubFeatureNames()){
 			txt[0] += featureName;
 		}
 
@@ -192,12 +189,12 @@ public class Feature implements Serializable, Labelable, Detailable {
 		this.name = name;
 	}
 
-	public List<String> getFeatureNames() {
-		return featureNames;
+	public List<String> getSubFeatureNames() {
+		return subFeatureNames;
 	}
 
-	public void setFeatureNames(List<String> featureNames) {
-		this.featureNames = featureNames;
+	public void setSubFeatureNames(List<String> subFeatureNames) {
+		this.subFeatureNames = subFeatureNames;
 	}
 
 	public List<Feature> getFeatures() {
@@ -232,19 +229,19 @@ public class Feature implements Serializable, Labelable, Detailable {
 		this.type = type;
 	}
 
-	public DokuFile getMarkdown() {
-		return markdown;
+	public DocFile getDocumentation() {
+		return documentation;
 	}
 
-	public void setMarkdown(DokuFile markdown) {
-		this.markdown = markdown;
+	public void setDocumentation(DocFile documentation) {
+		this.documentation = documentation;
 	}
 
-	public DokuFile getSpecification() {
+	public DocFile getSpecification() {
 		return specification;
 	}
 
-	public void setSpecification(DokuFile specification) {
+	public void setSpecification(DocFile specification) {
 		this.specification = specification;
 	}
 }

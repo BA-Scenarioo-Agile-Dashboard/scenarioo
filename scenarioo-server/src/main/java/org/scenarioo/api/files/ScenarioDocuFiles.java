@@ -39,11 +39,13 @@ public class ScenarioDocuFiles {
 
 	private static final String FILE_NAME_SCENARIO = "scenario.xml";
 
-	private static final String FILE_NAME_CASE = "feature.xml";
+	private static final String FILE_NAME_FEATURE = "feature.xml";
 
 	private static final String FILE_NAME_BUILD = "build.xml";
 
 	private static final String FILE_NAME_BRANCH = "branch.xml";
+
+	private static final String DIRECTORY_NAME_DOCS = "docs";
 
 	private static NumberFormat THREE_DIGIT_NUM_FORMAT = createNumberFormatWithMinimumIntegerDigits(3);
 
@@ -96,11 +98,11 @@ public class ScenarioDocuFiles {
 	}
 
 	public File getFeatureFile(final String branchName, final String buildName, final String featureName) {
-		return new File(getFeatureDirectory(branchName, buildName, featureName), FILE_NAME_CASE);
+		return new File(getFeatureDirectory(branchName, buildName, featureName), FILE_NAME_FEATURE);
 	}
 
 	public List<File> getFeatureFiles(final String branchName, final String buildName) {
-		return FilesUtil.getListOfFilesFromSubdirs(getBuildDirectory(branchName, buildName), FILE_NAME_CASE);
+		return FilesUtil.getListOfFilesFromSubdirs(getBuildDirectory(branchName, buildName), FILE_NAME_FEATURE);
 	}
 
 	public File getScenarioDirectory(final String branchName, final String buildName, final String featureName,
@@ -116,13 +118,6 @@ public class ScenarioDocuFiles {
 	}
 
 	public List<File> getScenarioFiles(final String branchName, final String buildName, final String featureName) {
-
-		System.out.println(branchName);
-		System.out.println(buildName);
-		System.out.println(featureName);
-
-		System.out.println(getFeatureDirectory(branchName, buildName, featureName));
-
 		return FilesUtil.getListOfFilesFromSubdirs(getFeatureDirectory(branchName, buildName, featureName),
 				FILE_NAME_SCENARIO);
 	}
@@ -159,6 +154,14 @@ public class ScenarioDocuFiles {
 			final String featureName, final String scenarioName, final int stepIndex) {
 		return new File(getScreenshotsDirectory(branchName, buildName, featureName, scenarioName),
 				THREE_DIGIT_NUM_FORMAT.format(stepIndex) + ".png");
+	}
+
+	/**
+	 * Get the directory to store arbitrary additional documents (like markdown files, gherkin files, etc.)
+	 * inside a build.
+	 */
+	public File getDocsDirectory(final String branchName, final String buildName) {
+		return new File(getBuildDirectory(branchName, buildName), DIRECTORY_NAME_DOCS);
 	}
 
 	private static NumberFormat createNumberFormatWithMinimumIntegerDigits(
