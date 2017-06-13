@@ -43,12 +43,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <div class="docMarg1">
                     <button type="button" class="btn btn-default" ng-click="dashboard.expandAll()">Expand all</button>
                     <button type="button" class="btn btn-default" ng-click="dashboard.collapseAll()">Collapse all</button>
-                    <div ng-if="dashboard.contains(dashboard.feature, 'markdown') || dashboard.contains(dashboard.feature, 'specification')">
+                    <div ng-if="dashboard.contains(dashboard.feature, 'documentation') || dashboard.contains(dashboard.feature, 'specification')">
                         <file-viewer feature="dashboard.feature"></file-viewer>
                     </div>
-                    <div ng-if="!dashboard.contains(dashboard.feature, 'markdown') && !dashboard.contains(dashboard.feature, 'specification')">
+                    <div ng-if="!dashboard.contains(dashboard.feature, 'documentation') && !dashboard.contains(dashboard.feature, 'specification')">
                         <br/>
-                        This feature doesn't contain a markdown or specification file.
+                        This feature doesn't contain a documentation or specification file.
                         <br/>
                         You're probably better of with the <a href="#/testScenarios">Scenarios-View</a>
                     </div>

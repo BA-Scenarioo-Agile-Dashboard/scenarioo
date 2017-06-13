@@ -18,6 +18,7 @@
 package org.scenarioo.rest.dokuFolder;
 
 import org.apache.log4j.Logger;
+import org.scenarioo.api.files.ScenarioDocuFiles;
 import org.scenarioo.api.util.files.FilesUtil;
 import org.scenarioo.business.builds.ScenarioDocuBuildsManager;
 import org.scenarioo.repository.ConfigurationRepository;
@@ -53,7 +54,7 @@ public class DocuFolderResource {
 			branchName,
 			buildName);
 
-		File docuFolder = new File(configurationRepository.getDocumentationDataDirectory().getAbsolutePath() + "/" + buildIdentifier.getBranchName() +"/" + buildIdentifier.getBuildName() + "/docu");
+		File docuFolder = new ScenarioDocuFiles(configurationRepository.getDocumentationDataDirectory()).getDocsDirectory(branchName, buildName);
 		if (!docuFolder.exists()){
 			LOGGER.info("No Documentaion directory found for build "+branchName+" / "+buildName);
 			return null;

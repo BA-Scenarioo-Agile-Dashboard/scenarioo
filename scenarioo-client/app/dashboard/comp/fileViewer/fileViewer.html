@@ -14,17 +14,17 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 -->
-<div ng-if="viewer.contains(viewer.feature, 'markdown')">
-    <div class="fileTitle" ng-click="viewer.feature.markdown.isCollapsed = !viewer.feature.markdown.isCollapsed">
-        <h3><i ng-show="!viewer.feature.markdown.isCollapsed" class="glyphicon glyphicon-chevron-down"></i>
-            <i ng-show="viewer.feature.markdown.isCollapsed" class="glyphicon glyphicon-chevron-right"></i>
-            {{viewer.feature.markdown.name}}
+<div ng-if="viewer.contains(viewer.feature, 'documentation')">
+    <div class="fileTitle" ng-click="viewer.feature.documentation.isCollapsed = !viewer.feature.documentation.isCollapsed">
+        <h3><i ng-show="!viewer.feature.documentation.isCollapsed" class="glyphicon glyphicon-chevron-down"></i>
+            <i ng-show="viewer.feature.documentation.isCollapsed" class="glyphicon glyphicon-chevron-right"></i>
+            {{viewer.feature.documentation.name}}
 
-            <a ng-repeat="link in viewer.feature.markdown.links" class="edit-link" href="{{link.url}}"> | {{link.name}}</a>
+            <a ng-repeat="link in viewer.feature.documentation.links" class="edit-link" href="{{link.url}}"> | {{link.name}}</a>
         </h3>
     </div>
-    <div uib-collapse="viewer.feature.markdown.isCollapsed" ng-show="!viewer.feature.markdown.isCollapsed">
-        <markdown  file="{{viewer.feature.markdown.url}}"></markdown>
+    <div uib-collapse="viewer.feature.documentation.isCollapsed" ng-show="!viewer.feature.documentation.isCollapsed">
+        <markdown  file="{{viewer.feature.documentation.url}}"></markdown>
     </div>
 </div>
 <div ng-if="viewer.contains(viewer.feature, 'specification')">

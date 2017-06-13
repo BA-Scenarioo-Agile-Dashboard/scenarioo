@@ -85,7 +85,7 @@ public class FeaturesResource {
 		List<FeatureSummary> rootFeatures = new ArrayList<>();
 		HashSet<FeatureSummary> featureClear = new HashSet<>();
 		for (FeatureSummary feature: features){
-			for (String featureName : feature.getFeatureNames()){
+			for (String featureName : feature.getSubFeatureNames()){
 				FeatureSummary clear = getFor(featureName, features);
 				feature.getFeatures().add(clear);
 				featureClear.add(clear);

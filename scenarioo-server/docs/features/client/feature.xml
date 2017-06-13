@@ -6,14 +6,14 @@
     <status>failed</status>
     <milestone>R1</milestone>
     <orderIndex>0</orderIndex>
-    <featureNames>gui-elements</featureNames>
-    <featureNames>sketch-editor</featureNames>
-    <featureNames>client-api-connection</featureNames>
-    <markdown>
+    <subFeatureNames>gui-elements</subFeatureNames>
+    <subFeatureNames>sketch-editor</subFeatureNames>
+    <subFeatureNames>client-api-connection</subFeatureNames>
+    <documentation>
         <name>Markdown-Test</name>
         <url>https://raw.githubusercontent.com/scenarioo/scenarioo/develop/README.md</url>
         <type>MARKDOWN</type>
-    </markdown>
+    </documentation>
     <specification>
         <name>Specification-Test</name>
         <url>https://raw.githubusercontent.com/scenarioo/scenarioo/develop/scenarioo-client/test/spec/scenario/scenario.controller.spec.js</url>

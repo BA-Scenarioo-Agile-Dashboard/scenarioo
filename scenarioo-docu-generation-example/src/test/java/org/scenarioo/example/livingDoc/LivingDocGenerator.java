@@ -96,7 +96,7 @@ public class LivingDocGenerator {
 		// Attach README.md, if available
 		File readmeFile = new File(directory, "README.md");
 		if (readmeFile.exists()) {
-			feature.setMarkdown(generateDocFile(readmeFile, basePath + "README.md"));
+			feature.setDocumentation(generateDocFile(readmeFile, basePath + "README.md"));
 		}
 
 		// Child features
@@ -105,7 +105,7 @@ public class LivingDocGenerator {
 		for (Feature childFeature : childFeatures) {
 			childFeatureNames.add(childFeature.getId());
 		}
-		feature.setFeatureNames(childFeatureNames);
+		feature.setSubFeatureNames(childFeatureNames);
 
 		// save
 		docuWriter.saveFeature(feature);
@@ -118,7 +118,7 @@ public class LivingDocGenerator {
 		feature.setId(name);
 		defineFeatureDetailsFromFileContent(feature, file);
 		if (file.getName().toLowerCase().endsWith(".md")) {
-			feature.setMarkdown(generateDocFile(file, basePath));
+			feature.setDocumentation(generateDocFile(file, basePath));
 		} else {
 			feature.setSpecification(generateDocFile(file, basePath));
 		}
@@ -126,11 +126,11 @@ public class LivingDocGenerator {
 		return feature;
 	}
 
-	private DokuFile generateDocFile(File file, String relativePath) {
-		DokuFile docFile = new DokuFile();
-		docFile.name = file.getName();
-		docFile.url = relativePath;
-		docFile.type = FileType.getFromFileEnding(file);
+	private DocFile generateDocFile(File file, String relativePath) {
+		DocFile docFile = new DocFile();
+		docFile.setName(file.getName());
+		docFile.setUrl(relativePath);
+		docFile.setType(FileType.getFromFileEnding(file));
 		for (DocLinkConfig linkConfig : docLinkConfigs) {
 			docFile.addLink(new Link(linkConfig.getName(), linkConfig.getBaseUrl() + "/" + relativePath));
 		}
