@@ -12,8 +12,8 @@ public class FeatureDocumentation {
 
 
 	public static final String FEATURE_XML = "/feature.xml";
-	public static final DokuFile md1 = new DokuFile("Markdown-Test","https://raw.githubusercontent.com/scenarioo/scenarioo/develop/README.md",FileType.MARKDOWN);
-	public static final DokuFile spec1 = new DokuFile("Specification-Test", "https://raw.githubusercontent.com/scenarioo/scenarioo/develop/scenarioo-client/test/spec/scenario/scenario.controller.spec.js", FileType.JAVASCRIPT);
+	public static final DocFile md1 = new DocFile("Markdown-Test","https://raw.githubusercontent.com/scenarioo/scenarioo/develop/README.md",FileType.MARKDOWN);
+	public static final DocFile spec1 = new DocFile("Specification-Test", "https://raw.githubusercontent.com/scenarioo/scenarioo/develop/scenarioo-client/test/spec/scenario/scenario.controller.spec.js", FileType.JAVASCRIPT);
 
 	@Test
 	public void featureDashboardView() {
@@ -25,7 +25,7 @@ public class FeatureDocumentation {
 		feature.setId("dashboard-view");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R3");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -40,7 +40,7 @@ public class FeatureDocumentation {
 		feature.setId("feature-view");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -55,7 +55,7 @@ public class FeatureDocumentation {
 		feature.setId("scenario-view");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -70,7 +70,7 @@ public class FeatureDocumentation {
 		feature.setId("documentation-view");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -83,21 +83,21 @@ public class FeatureDocumentation {
 		feature.setName("GUI-Elements");
 		feature.setDescription("The 4 GUI views, of which two will be slightly changed from the old scenarioo and two will be totaly new");
 		feature.setId("gui-elements");
-		feature.setFeatureNames(new ArrayList<String>());
-		feature.getFeatureNames().add("feature-view");
-		feature.getFeatureNames().add("scenario-view");
-		feature.getFeatureNames().add("documentation-view");
-		feature.getFeatureNames().add("dashboard-view");
-		feature.getFeatureNames().add("tree-navigation");
+		feature.setSubFeatureNames(new ArrayList<String>());
+		feature.getSubFeatureNames().add("feature-view");
+		feature.getSubFeatureNames().add("scenario-view");
+		feature.getSubFeatureNames().add("documentation-view");
+		feature.getSubFeatureNames().add("dashboard-view");
+		feature.getSubFeatureNames().add("tree-navigation");
 		feature.setStatus(Status.SUCCESS.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(new DokuFile("GUI-Documentation", "GUI-Elements.md", FileType.MARKDOWN));
+		feature.setDocumentation(new DocFile("GUI-Documentation", "GUI-Elements.md", FileType.MARKDOWN));
 		feature.setSpecification(spec1);
-		feature.getMarkdown().links = new ArrayList<>();
+		feature.getDocumentation().setLinks(new ArrayList<>());
 		Link mdLink = new Link();
-		mdLink.name = "Original";
-		mdLink.url = "https://google.com";
-		feature.getMarkdown().links.add(mdLink);
+		mdLink.setName("Original");
+		mdLink.setUrl("https://google.com");
+		feature.getDocumentation().getLinks().add(mdLink);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
 	}
@@ -111,7 +111,7 @@ public class FeatureDocumentation {
 		feature.setId("importer");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -124,13 +124,13 @@ public class FeatureDocumentation {
 		feature.setName("Client");
 		feature.setDescription("Contains all work todo on the client side. Including all the Views, the api-connection and the Diff- and sketch functionality.");
 		feature.setId("client");
-		feature.setFeatureNames(new ArrayList<String>());
-		feature.getFeatureNames().add("gui-elements");
-		feature.getFeatureNames().add("sketch-editor");
-		feature.getFeatureNames().add("client-api-connection");
+		feature.setSubFeatureNames(new ArrayList<String>());
+		feature.getSubFeatureNames().add("gui-elements");
+		feature.getSubFeatureNames().add("sketch-editor");
+		feature.getSubFeatureNames().add("client-api-connection");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -143,15 +143,15 @@ public class FeatureDocumentation {
 		feature.setName("Server");
 		feature.setDescription("Contains all work todo on the server side");
 		feature.setId("server");
-		feature.setFeatureNames(new ArrayList<String>());
-		feature.getFeatureNames().add("importer");
-		feature.getFeatureNames().add("comparison");
-		feature.getFeatureNames().add("full-text-search");
-		feature.getFeatureNames().add("sketch-editor");
-		feature.getFeatureNames().add("rest-api");
+		feature.setSubFeatureNames(new ArrayList<String>());
+		feature.getSubFeatureNames().add("importer");
+		feature.getSubFeatureNames().add("comparison");
+		feature.getSubFeatureNames().add("full-text-search");
+		feature.getSubFeatureNames().add("sketch-editor");
+		feature.getSubFeatureNames().add("rest-api");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -166,7 +166,7 @@ public class FeatureDocumentation {
 		feature.setId("comparison");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R2");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -181,7 +181,7 @@ public class FeatureDocumentation {
 		feature.setId("full-text-search");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R2");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -196,7 +196,7 @@ public class FeatureDocumentation {
 		feature.setId("sketch-editor");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R3");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -211,7 +211,7 @@ public class FeatureDocumentation {
 		feature.setId("tree-navigation");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R2");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -226,7 +226,7 @@ public class FeatureDocumentation {
 		feature.setId("rest-api");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());
@@ -240,7 +240,7 @@ public class FeatureDocumentation {
 		feature.setId("client-api-connection");
 		feature.setStatus(Status.FAILED.getKeyword());
 		feature.setMilestone("R1");
-		feature.setMarkdown(md1);
+		feature.setDocumentation(md1);
 		feature.setSpecification(spec1);
 		writeToFile(feature);
 		Assert.assertTrue(new File(baseFolder + "/" + feature.getId() + FEATURE_XML).exists());

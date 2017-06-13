@@ -40,7 +40,7 @@ public class ScenarioDocuFiles {
 	private static final String FILE_NAME_SCENARIO = "scenario.xml";
 
 	// TODO - comment by Rolf: should be called "FILE_NAME_FEATURE"
-	private static final String FILE_NAME_CASE = "feature.xml";
+	private static final String FILE_NAME_FEATURE = "feature.xml";
 
 	private static final String FILE_NAME_BUILD = "build.xml";
 
@@ -100,11 +100,11 @@ public class ScenarioDocuFiles {
 	}
 
 	public File getFeatureFile(final String branchName, final String buildName, final String featureName) {
-		return new File(getFeatureDirectory(branchName, buildName, featureName), FILE_NAME_CASE);
+		return new File(getFeatureDirectory(branchName, buildName, featureName), FILE_NAME_FEATURE);
 	}
 
 	public List<File> getFeatureFiles(final String branchName, final String buildName) {
-		return FilesUtil.getListOfFilesFromSubdirs(getBuildDirectory(branchName, buildName), FILE_NAME_CASE);
+		return FilesUtil.getListOfFilesFromSubdirs(getBuildDirectory(branchName, buildName), FILE_NAME_FEATURE);
 	}
 
 	public File getScenarioDirectory(final String branchName, final String buildName, final String featureName,
