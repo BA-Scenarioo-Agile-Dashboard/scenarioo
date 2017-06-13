@@ -39,15 +39,13 @@ public class ScenarioDocuFiles {
 
 	private static final String FILE_NAME_SCENARIO = "scenario.xml";
 
-	// TODO - comment by Rolf: should be called "FILE_NAME_FEATURE"
 	private static final String FILE_NAME_FEATURE = "feature.xml";
 
 	private static final String FILE_NAME_BUILD = "build.xml";
 
 	private static final String FILE_NAME_BRANCH = "branch.xml";
 
-	// TODO - comment by Rolf: value should be `docs` - but somehow there seem to be other places where this has been implemented to be "docu" ??
-	private static final String DIRECTORY_NAME_DOCS = "docu";
+	private static final String DIRECTORY_NAME_DOCS = "docs";
 
 	private static NumberFormat THREE_DIGIT_NUM_FORMAT = createNumberFormatWithMinimumIntegerDigits(3);
 
@@ -120,13 +118,6 @@ public class ScenarioDocuFiles {
 	}
 
 	public List<File> getScenarioFiles(final String branchName, final String buildName, final String featureName) {
-
-		System.out.println(branchName);
-		System.out.println(buildName);
-		System.out.println(featureName);
-
-		System.out.println(getFeatureDirectory(branchName, buildName, featureName));
-
 		return FilesUtil.getListOfFilesFromSubdirs(getFeatureDirectory(branchName, buildName, featureName),
 				FILE_NAME_SCENARIO);
 	}
