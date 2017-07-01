@@ -3,12 +3,18 @@ package org.scenarioo.example.livingDoc;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.text.WordUtils;
 import org.scenarioo.api.ScenarioDocuWriter;
+import org.scenarioo.api.files.ScenarioDocuFiles;
+import org.scenarioo.api.util.xml.ScenarioDocuXMLFileUtil;
 import org.scenarioo.model.docu.entities.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.scenarioo.api.rules.CharacterChecker.checkIdentifier;
 
 /**
  * A simple example generator to transform a file structure of markdown files and gherkin feature files
@@ -16,6 +22,9 @@ import java.util.List;
  */
 public class LivingDocGenerator {
 
+	private final ScenarioDocuFiles docuFiles;
+	private final String branchName;
+	private final String buildName;
 	File targetPath;
 
 	List<DocLinkConfig> docLinkConfigs = new ArrayList<>();
@@ -25,6 +34,16 @@ public class LivingDocGenerator {
 	public LivingDocGenerator(File targetPath, String branchName, String buildName) {
 		this.targetPath = targetPath;
 		this.docuWriter = new ScenarioDocuWriter(targetPath, branchName, buildName);
+
+		this.docuFiles = new ScenarioDocuFiles(targetPath);
+		this.branchName = branchName;
+		this.buildName = buildName;
+
+	}
+
+	private static File getResourceFile(final String relativeResourcePath) throws URISyntaxException {
+		URL url = LivingDocGenerator.class.getClassLoader().getResource(relativeResourcePath);
+		return new File(url.toURI());
 	}
 
 	/**
@@ -63,8 +82,26 @@ public class LivingDocGenerator {
 			// 2. recursively go through all documents in docs folder and generate features
 			generateFeatures(docFilesSourceDir, "");
 
-		} catch (IOException e) {
+			copySampleScenarios();
+
+		} catch (IOException | URISyntaxException e) {
 			throw new RuntimeException("IO Exception on writing feature structure", e);
+		}
+	}
+
+	private void copySampleScenarios() throws URISyntaxException, IOException {
+		File dir = docuFiles.getBuildDirectory(branchName, buildName);
+		File res = getResourceFile("example/find_no_results");
+
+		System.out.println(res);
+
+		for (File file:dir.listFiles()) {
+			if(file.isDirectory()){
+				System.out.println(file);
+				File f = new File(file.getAbsolutePath()+"/find_no_results");
+				f.mkdirs();
+				FileUtils.copyDirectory(res, f);
+			}
 		}
 	}
 
@@ -108,9 +145,31 @@ public class LivingDocGenerator {
 		feature.setSubFeatureNames(childFeatureNames);
 
 		// save
-		docuWriter.saveFeature(feature);
+		saveFeature(feature);
 		return feature;
 	}
+
+	public void saveFeature(final Feature feature) {
+
+		if (feature.getMilestone() == null)
+			feature.setMilestone("M - 1");
+
+		checkIdentifier(feature.getId());
+		File destCaseDir = getFeatureDirectory(feature.getId());
+		createDirectoryIfNotYetExists(destCaseDir);
+		File destCaseFile = docuFiles.getFeatureFile(branchName, buildName, feature.getId());
+		ScenarioDocuXMLFileUtil.marshal(feature, destCaseFile);
+	}
+	private void createDirectoryIfNotYetExists(final File directory) {
+		docuFiles.assertRootDirectoryExists();
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+	}
+	private File getFeatureDirectory(final String featureName) {
+		return docuFiles.getFeatureDirectory(branchName, buildName, featureName);
+	}
+
 
 	private Feature generateFeatureForFile(File file, String basePath) {
 		String name = truncEnding(file.getName());
@@ -122,7 +181,7 @@ public class LivingDocGenerator {
 		} else {
 			feature.setSpecification(generateDocFile(file, basePath));
 		}
-		docuWriter.saveFeature(feature);
+		saveFeature(feature);
 		return feature;
 	}
 
