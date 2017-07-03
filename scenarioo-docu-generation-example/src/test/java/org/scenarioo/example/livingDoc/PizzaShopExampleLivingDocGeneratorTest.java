@@ -1,6 +1,7 @@
 package org.scenarioo.example.livingDoc;
 
 import org.junit.Test;
+import org.scenarioo.example.util.BuildOutputDirResource;
 import org.scenarioo.model.docu.entities.Branch;
 import org.scenarioo.model.docu.entities.Build;
 
@@ -15,9 +16,9 @@ public class PizzaShopExampleLivingDocGeneratorTest {
 	public void generatePizzaShopExampleData() throws URISyntaxException {
 
 		// Config of generator:
-		String branchName = "PizzaaaS - Living Doc Example";
+		String branchName = "pizzaaas_-_living_doc_example";
 		String buildName = "build-1";
-		File targetDir = new File("build/scenarioDocuExample");
+		File targetDir = BuildOutputDirResource.DOCU_BUILD_DIRECTORY;
 		File docFilesSourceDir = getResourceFile("example/pizza-shop-example");
 		LivingDocGenerator generator = new LivingDocGenerator(targetDir, branchName, buildName);
 
@@ -47,6 +48,8 @@ public class PizzaShopExampleLivingDocGeneratorTest {
 
 		// Flush all asynch writing
 		generator.flush();
+
+		System.out.println("Pizza Shop Living Doc Example generated.");
 
 	}
 
